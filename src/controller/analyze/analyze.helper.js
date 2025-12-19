@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const OLLAMA_URL = "http://localhost:11434/api/generate";
-const MODEL = "phi3";
+const OLLAMA_URL = process.env.OLLAMA_API_URL;
+const MODEL = process.env.MODEL;
 
 const analyzeIssues = async (prompt, issues) => {
   const issueChunks = chunkArray(issues, 2);
