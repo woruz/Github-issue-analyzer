@@ -49,17 +49,39 @@ This project is **backend-only** and exposes two REST APIs:
 ```
 github-issue-analyzer/
 ├── src/
-│ ├── index.js # Application entry point
-│ ├── routes.js # API routes
-│ ├── github.js # GitHub API logic
-│ ├── analyze.js # LLM (Ollama) integration
-│ └── db.js # SQLite setup
+│ ├── controller/
+│ │ ├── analyze/
+│ │ │ ├── analyze.controller.js # Analyze API controller
+│ │ │ └── analyze.helper.js # LLM (Ollama) helper logic
+│ │ └── github/
+│ │ ├── github.controller.js # GitHub scan controller
+│ │ └── github.helper.js # GitHub API helper logic
+│ │
+│ ├── platform/
+│ │ └── db.js # SQLite database setup
+│ │
+│ ├── routes/
+│ │ └── routes.js # API route definitions
+│ │
+│ └── index.js # Application entry point
+│
 ├── data/
-│ └── issues.db # SQLite database
+│ └── issues.db # SQLite database (generated at runtime)
+│
 ├── .env # Environment variables (not committed)
 ├── .env.sample # Sample environment configuration
+├── .gitignore
 ├── package.json
+├── package-lock.json
 └── README.md
+```
+
+### 📌 Notes on Structure
+```bash
+- Controllers handle **request/response logic**
+- Helpers encapsulate **GitHub API and LLM (Ollama) logic**
+- `platform/db.js` is responsible for **database initialization**
+- `issues.db` is generated at runtime and excluded from version control
 ```
 ---
 
