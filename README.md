@@ -128,6 +128,7 @@ Response
 Purpose:-
 Analyze cached GitHub issues using a natural-language prompt and an LLM.
 
+```json
 Request Body
 {
   "repo": "facebook/react",
@@ -145,6 +146,7 @@ Response
 {
   "analysis": "Most issues relate to crashes and memory leaks. Maintainers should prioritize fixing startup crashes and lifecycle-related bugs..."
 }
+```
 
 💾 Storage Choice & Reasoning
 ✅ Chosen Storage: SQLite
