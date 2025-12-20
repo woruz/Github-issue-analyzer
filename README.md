@@ -3,7 +3,7 @@
 
 ![Node.js](https://img.shields.io/badge/Node.js-18+-green)
 ![SQLite](https://img.shields.io/badge/SQLite-Local%20Storage-blue)
-![LLM](https://img.shields.io/badge/LLM-OpenAI-orange)
+![LLM](https://img.shields.io/badge/LLM-Ollama-orange)
 ![Backend](https://img.shields.io/badge/Type-Backend%20Only-lightgrey)
 
 ---
@@ -52,11 +52,12 @@ github-issue-analyzer/
 │ ├── index.js # Application entry point
 │ ├── routes.js # API routes
 │ ├── github.js # GitHub API logic
-│ ├── analyze.js # LLM integration
+│ ├── analyze.js # LLM (Ollama) integration
 │ └── db.js # SQLite setup
 ├── data/
 │ └── issues.db # SQLite database
-├── .env
+├── .env # Environment variables (not committed)
+├── .env.sample # Sample environment configuration
 ├── package.json
 └── README.md
 
