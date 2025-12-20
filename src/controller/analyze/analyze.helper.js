@@ -4,6 +4,24 @@ const OLLAMA_URL = process.env.OLLAMA_API_URL;
 const MODEL = process.env.MODEL;
 
 const analyzeIssues = async (prompt, issues) => {
+
+  if (!prompt || typeof prompt !== "string") {
+    const err = new Error("Prompt must be a non-empty string");
+    err.status = 400;
+    throw err;
+  }
+
+  if (!Array.isArray(issues) || issues.length === 0) {
+    const err = new Error("No issues provided for analysis");
+    err.status = 400;
+    throw err;
+  }
+
+  if (!OLLAMA_URL || !MODEL) {
+    const err = new Error("Ollama configuration missing");
+    err.status = 500;
+    throw err;
+  }
   const issueChunks = chunkArray(issues, 2);
   let combinedAnalysis = "";
 
@@ -49,7 +67,7 @@ const analyzeIssues = async (prompt, issues) => {
 };
 
 const sanitizeText = (text, maxLength = 800) => {
-  if (!text) return "";
+  if (!text || typeof text !== "string") return "";
   return text
     .replace(/```[\s\S]*?```/g, "[code omitted]")
     .replace(/\n{3,}/g, "\n\n")
@@ -57,6 +75,7 @@ const sanitizeText = (text, maxLength = 800) => {
 };
 
 const chunkArray = (arr, size) => {
+  if (!Array.isArray(arr) || size <= 0) return [];
   const chunks = [];
   for (let i = 0; i < arr.length; i += size) {
     chunks.push(arr.slice(i, i + size));

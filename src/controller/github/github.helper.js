@@ -2,9 +2,16 @@ import axios from "axios";
 
 const fetchIssues = async (repo) => {
   try {
+    if (!repo || typeof repo !== "string") {
+      const err = new Error("Repository must be a non-empty string");
+      err.status = 400;
+      throw err;
+    }
     const [owner, name] = repo.split("/");
     if (!owner || !name) {
-      throw new Error("Invalid repo format. Use 'owner/repo'.");
+      const err = new Error("Invalid repo format. Use 'owner/repo'.");
+      err.status = 400;
+      throw err;
     }
     const res = await axios.get(
       `https://api.github.com/repos/${owner}/${name}/issues`,
@@ -16,13 +23,18 @@ const fetchIssues = async (repo) => {
       }
     );
 
-    if(!res || !res.status) {
-      throw new Error(res?.data?.message || "No response from GitHub API");
+    if (!res || res.status !== 200) {
+      const err = new Error("Failed to fetch issues from GitHub");
+      err.status = res?.status || 502;
+      throw err;
     }
 
-    if(!Array.isArray(res.data)) {
-      throw new Error("Unexpected response format from GitHub API");
+    if (!Array.isArray(res.data)) {
+      const err = new Error("Unexpected response format from GitHub API");
+      err.status = 502;
+      throw err;
     }
+
     return res.data.filter((issue) => !issue.pull_request);
   } catch (error) {
     throw error;
@@ -30,7 +42,7 @@ const fetchIssues = async (repo) => {
 };
 
 const githubHelper = {
-  fetchIssues,
+  fetchIssues
 };
 
 export default githubHelper;
