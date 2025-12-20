@@ -98,6 +98,7 @@ node src/index.js
 Purpose:-
 Fetch and locally cache all open GitHub issues for a given repository.
 
+```json
 Request Body
 {
   "repo": "owner/repository-name"
@@ -121,7 +122,7 @@ Response
   "issues_fetched": 42,
   "cached_successfully": true
 }
-
+```
 
 🧠 POST /analyze
 Purpose:-
