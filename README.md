@@ -190,6 +190,46 @@ curl -X POST http://localhost:3000/analyze \
   -d '{"repo":"facebook/react","prompt":"Summarize major issue themes"}'
 ```
 
+## 🤖 Prompts used
+
+During development, the following LLM-related queries and investigations were performed.
+
+### Queries Regarding OpenAI Credentials
+
+- “How do I create OpenAI API credentials for using the Chat Completion API?”
+- “How to generate and configure an OpenAI API key for a Node.js backend?”
+
+---
+
+### Queries Regarding OpenAI API Issues
+
+- “Why is the OpenAI API returning authentication or quota errors?”
+- “Why is the OpenAI API not working despite a valid API key?”
+
+These queries helped identify issues related to:
+- API quota limitations
+- Billing requirements
+
+---
+
+### Queries Exploring LLM Alternatives
+
+- “What are good alternatives to OpenAI for LLM-based text analysis?”
+- “How to use local LLMs instead of cloud-based APIs?”
+- “How to integrate Ollama with a Node.js backend?”
+- “How to run LLama or Mistral or phi3 locally using Ollama?”
+- “Why is Mistral or LLama model not working in my system?”
+- “Give me a model that utilizes less RAM?”
+- “Difference between CPU and GPU?”
+
+---
+
+### Final Decision
+
+Based on these investigations, the project uses **Ollama** for local LLM inference.  
+This approach removes external API dependencies, avoids rate limits and billing issues, and allows reliable natural-language analysis directly on the developer’s machine.
+
+
 ### 👤 Author
 ```bash
 Sabil Danish
