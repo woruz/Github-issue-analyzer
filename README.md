@@ -46,7 +46,6 @@ This project is **backend-only** and exposes two REST APIs:
 ---
 
 ## 📂 Project Structure
-
 ```
 github-issue-analyzer/
 ├── src/

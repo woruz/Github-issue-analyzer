@@ -1,9 +1,15 @@
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import path from 'path';
+import fs from 'fs';
 
-const dbPath = path.resolve('data', 'issues.db');
 
+const dataDir = path.resolve(process.cwd(), 'data');
+
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir);
+}
+const dbPath = path.resolve(dataDir, 'issues.db');
 
 export const db = await open({
 filename: dbPath,
