@@ -69,22 +69,27 @@ github-issue-analyzer/
 ```bash
 git clone <your-repo-url>
 cd github-issue-analyzer
+```
 
 2️⃣ Install dependencies
+```bash
 npm install
+```
 
 3️⃣ Configure environment variables
-
+```bash
 Create a .env file in the root directory:
 
 PORT=3000
 GITHUB_TOKEN=your_github_personal_access_token
 OLLAMA_API_URL=http://localhost:11434/api/generate
 MODEL=your_model_name
+```
 
 ▶️ Running the Server
+```bash
 node src/index.js
-
+```
 
 🔌 API Endpoints
 
