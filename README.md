@@ -47,6 +47,7 @@ This project is **backend-only** and exposes two REST APIs:
 
 ## 📂 Project Structure
 
+```
 github-issue-analyzer/
 ├── src/
 │ ├── index.js # Application entry point
@@ -60,7 +61,7 @@ github-issue-analyzer/
 ├── .env.sample # Sample environment configuration
 ├── package.json
 └── README.md
-
+```
 ---
 
 ## ⚙️ Setup & Installation
