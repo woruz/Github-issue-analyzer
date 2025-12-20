@@ -153,8 +153,9 @@ Response
 💾 Storage Choice & Reasoning
 ✅ Chosen Storage: SQLite
 
-Why SQLite?
+### Why SQLite?
 
+```bash
 Persistent storage across server restarts
 No external database required
 Easy to inspect and query
@@ -162,18 +163,22 @@ Scales better than in-memory or JSON storage
 Closely mirrors real-world backend systems
 This makes SQLite the best balance between simplicity and production realism for this assignment.
 
-⚠️ Edge Case Handling
+```
 
+### ⚠️ Edge Case Handling
+
+```bash
 The service gracefully handles:
 Repository not yet scanned
 No cached issues available
 GitHub API errors or rate limits
 LLM API failures
 Empty or invalid input
+```
 
+### 🧪 Example Usage (cURL)
 
-🧪 Example Usage (cURL)
-
+```bash
 Scan a Repository
 curl -X POST http://localhost:3000/scan \
   -H "Content-Type: application/json" \
@@ -183,7 +188,9 @@ Analyze Issues
 curl -X POST http://localhost:3000/analyze \
   -H "Content-Type: application/json" \
   -d '{"repo":"facebook/react","prompt":"Summarize major issue themes"}'
+```
 
-
-👤 Author
-    Sabil Danish
+### 👤 Author
+```bash
+Sabil Danish
+```
