@@ -40,7 +40,7 @@ This project is **backend-only** and exposes two REST APIs:
 - **Express.js** – REST API server
 - **Axios** – GitHub API integration
 - **SQLite** – Local persistent storage
-- **OpenAI API** – LLM-powered analysis
+- **Ollama API** – LLM-powered analysis
 - **dotenv** – Environment variable management
 
 ---
