@@ -68,7 +68,7 @@ github-issue-analyzer/
 ### 1️⃣ Clone the repository
 ```bash
 git clone https://github.com/woruz/Github-issue-analyzer.git
-cd github-issue-analyzer
+cd Github-issue-analyzer
 ```
 
 2️⃣ Install dependencies
