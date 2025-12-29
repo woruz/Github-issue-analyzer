@@ -4,7 +4,6 @@ const OLLAMA_URL = process.env.OLLAMA_API_URL;
 const MODEL = process.env.MODEL;
 
 const analyzeIssues = async (prompt, issues) => {
-
   if (!prompt || typeof prompt !== "string") {
     const err = new Error("Prompt must be a non-empty string");
     err.status = 400;
@@ -51,7 +50,7 @@ const analyzeIssues = async (prompt, issues) => {
         prompt: fullPrompt,
         stream: false,
         options: {
-          num_predict: 250, 
+          num_predict: 250,
         },
       });
 
@@ -64,6 +63,52 @@ const analyzeIssues = async (prompt, issues) => {
   }
 
   return combinedAnalysis.trim();
+};
+
+const analyzeIssuesStream = async (prompt, issues, res) => {
+  const issueChunks = chunkArray(issues, 2);
+
+  for (let i = 0; i < issueChunks.length; i++) {
+    const chunk = issueChunks[i];
+
+    const issueText = chunk
+      .map(
+        (issue, idx) =>
+          `Issue ${idx + 1}:\nTitle: ${issue.title}\nBody: ${sanitizeText(
+            issue.body
+          )}`
+      )
+      .join("\n\n");
+
+    const fullPrompt = `
+Task:
+${prompt}
+
+Issues:
+${issueText}
+
+Respond concisely.
+`;
+
+    res.write(`\n--- Analyzing chunk ${i + 1}/${issueChunks.length} ---\n`);
+
+    try {
+      const response = await axios.post(process.env.OLLAMA_API_URL, {
+        model: process.env.MODEL,
+        prompt: fullPrompt,
+        stream: false,
+        options: {
+          num_predict: 350,
+        },
+      });
+
+      // 🔥 Stream Ollama response
+      res.write(response.data.response + "\n");
+    } catch (err) {
+      res.write("\n❌ Ollama failed for this chunk\n");
+      throw err;
+    }
+  }
 };
 
 const sanitizeText = (text, maxLength = 800) => {
@@ -85,6 +130,7 @@ const chunkArray = (arr, size) => {
 
 const analyzeHelper = {
   analyzeIssues,
+  analyzeIssuesStream,
 };
 
 export default analyzeHelper;

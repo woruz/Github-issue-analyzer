@@ -8,5 +8,6 @@ const router = express.Router();
 
 router.post('/scan',githubController.getRepoIssues);
 router.post('/analyze', analyzeController.analyzeIssues);
+router.post('/analyzeById/:issueId', analyzeController.analyzeIssuesById);
 
 export default router;
